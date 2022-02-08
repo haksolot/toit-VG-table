@@ -5,9 +5,13 @@
 	</head>
 	
 	<script>
-		function alertlol(){
-			alert("Salut fdp");
-		}
+		document.addEventListener('keydown', evt =>
+		{
+    		if (evt.key === 'Escape') 
+			{
+        		document.getElementById('main').style.filter='blur(0px)';
+    		}
+		});
 
 	</script>
 
@@ -21,6 +25,7 @@
 	}
 	
     .base {
+		/*filter:blur(5px); Pour plus tard*/
         width: 350px;
         height: 510px;
         transform: translate(-50%, -50%) skew(20deg);
@@ -33,34 +38,53 @@
 		right:50vw;
     }
 
-    .box {
+    .case {
         width: 167.5px;
         height: 160px;
         border: 50px double black;
-        transform: translate(-50%, -50%);
+        transform: translate(-49%, -51%);
         background: white;
 	    border-radius: 25px;
 	    position: absolute;
 		cursor: pointer;
+		box-shadow: 0px;
     }
 
-	.box:hover {
+	.case:hover {
 		background: rgb(0, 0, 0);
 		border: 50px double white;
+		transition-duration: 200ms;
+		transform: translate(-50%, -50%);
+		box-shadow: -2px 2px 5px rgba(121, 121, 121, 0.575);
+    }
+
+	.boite-dialogue {
+		/*filter:blur(5px); Pour plus tard*/
+        width: 600px;
+        height: 400px;
+        transform: translate(-50%, -50%);
+        background: rgb(0, 0, 0);
+        border:4px solid rgb(255, 255, 255);
+	    border-radius: 25px;
+	    position: absolute;
+		top: 50vh;
+		bottom: 50vh;
+		left:50vw;
+		right:50vw;
     }
 
   
 	
 	</style>
 	
-	<body class="background">
-		<div class="base">
-            <button class="box"; style="top: 90px;left: 90px;"></button>
-            <button class="box"; style="top: 90px;left: 260px;"></button>
-            <button class="box"; style="top: 255px;left: 90px;"></button>
-            <button class="box"; style="top: 255px;left: 260px;"></button>
-            <button class="box"; style="top: 420px;left: 90px;"></button>
-            <button class="box"; style="top: 420px; left: 260px;"; onclick="alertlol()"></button>
+	<body id="background" class="background">
+		<div id="main" class="base">
+            <button class="case"; style="top: 90px;left: 90px;"></button>
+            <button class="case"; style="top: 90px;left: 260px;"></button>
+            <button class="case"; style="top: 255px;left: 90px;"></button>
+            <button class="case"; style="top: 255px;left: 260px;"></button>
+            <button class="case"; style="top: 420px;left: 90px;"></button>
+            <button class="case"; style="top: 420px; left: 260px;"; onclick="document.getElementById('main').style.filter='blur(20px)';"></button>
         </div>
 	
 	</body>
