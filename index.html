@@ -1,0 +1,74 @@
+<DOCTYPE!>
+<html>
+	<head>
+		<title>Toit Végétable</title>
+	</head>
+	
+	<script>
+		function alertlol(){
+			alert("Salut fdp");
+		}
+
+	</script>
+
+	<style>
+	.background{
+		background-color:black;
+	}
+	
+	.text{
+	 color:white;
+	}
+	
+    .base {
+        width: 350px;
+        height: 510px;
+        transform: translate(-50%, -50%) skew(20deg);
+        background: rgb(255, 255, 255);
+	    border-radius: 25px;
+	    position: absolute;
+		top: 50vh;
+		bottom: 50vh;
+		left:50vw;
+		right:50vw;
+    }
+
+    .box {
+        width: 167.5px;
+        height: 160px;
+        border: 50px double black;
+        transform: translate(-50%, -50%);
+        background: white;
+	    border-radius: 25px;
+	    position: absolute;
+		cursor: pointer;
+    }
+
+	.box:hover {
+		background: rgb(0, 0, 0);
+		border: 50px double white;
+    }
+
+  
+	
+	</style>
+	
+	<body class="background">
+		<div class="base">
+            <button class="box"; style="top: 90px;left: 90px;"></button>
+            <button class="box"; style="top: 90px;left: 260px;"></button>
+            <button class="box"; style="top: 255px;left: 90px;"></button>
+            <button class="box"; style="top: 255px;left: 260px;"></button>
+            <button class="box"; style="top: 420px;left: 90px;"></button>
+            <button class="box"; style="top: 420px; left: 260px;"; onclick="alertlol()"></button>
+        </div>
+	
+	</body>
+
+
+
+
+
+
+
+</html>
