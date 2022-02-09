@@ -10,6 +10,7 @@
     		if (evt.key === 'Escape') 
 			{
         		document.getElementById('main').style.filter='blur(0px)';
+				document.getElementById('dialog').style.display='none';
     		}
 		});
 
@@ -71,6 +72,8 @@
 		bottom: 50vh;
 		left:50vw;
 		right:50vw;
+		display:none;
+		transition-duration: 200ms;
     }
 
   
@@ -84,8 +87,10 @@
             <button class="case"; style="top: 255px;left: 90px;"></button>
             <button class="case"; style="top: 255px;left: 260px;"></button>
             <button class="case"; style="top: 420px;left: 90px;"></button>
-            <button class="case"; style="top: 420px; left: 260px;"; onclick="document.getElementById('main').style.filter='blur(20px)';"></button>
+            <button class="case"; style="top: 420px; left: 260px;"; onclick="document.getElementById('main').style.filter='blur(20px)';document.getElementById('main').style.transitionDuration='200ms';document.getElementById('dialog').style.display='block'"></button>
         </div>
+
+		<div id='dialog' class="boite-dialogue"></div>
 	
 	</body>
 
