@@ -5,6 +5,10 @@
 	</head>
 	
 	<script>
+		/*document.getElementById("waves").style.height= pourcentage_px + 'px';*/
+
+		/* Fonction pour détecter la pression de la touche ESC 
+		et ferme la fenêtre ainsi que l'effet blur*/
 		document.addEventListener('keydown', evt =>
 		{
     		if (evt.key === 'Escape') 
@@ -13,6 +17,25 @@
 				document.getElementById('dialog').style.display='none';
     		}
 		});
+
+		function test()
+		{
+			alert(pourcentage_px+"px");
+		}
+		/**/
+
+		/* Fonction pour ouvrir la fenêtre de config */
+
+		var caseActuelle = 0;
+		let pourcentage = 60;
+		let pourcentage_px = pourcentage * 1.8;
+		
+		function showbox()
+		{
+			document.getElementById('main').style.filter='blur(20px)';document.getElementById('main').style.transitionDuration='200ms';document.getElementById('dialog').style.display='block';
+			document.getElementById('pourcentage').innerHTML= pourcentage + "%";
+			document.getElementById('waves').style.height= pourcentage_px + 'px';			
+		}
 
 	</script>
 
@@ -60,7 +83,6 @@
     }
 
 	.boite-dialogue {
-		/*filter:blur(5px); Pour plus tard*/
         width: 600px;
         height: 400px;
         transform: translate(-50%, -50%);
@@ -76,22 +98,44 @@
 		transition-duration: 200ms;
     }
 
-  
-	
+	.cadran-humidity{
+		height: 180px;
+		width: 180px;
+		top:120px;
+		left:120px;
+		border-radius: 50%;
+		border: 10px solid white;
+		background-color: rgba(0, 0, 0, 0);
+		display: inline-block;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		overflow: hidden;
+	}
+	.waves{
+		/*height: 90px;*/
+		width: 180px;
+		left: 0%;
+		bottom: 0%;
+		background-color: turquoise;
+		position:absolute;
+	}
 	</style>
 	
 	<body id="background" class="background">
 		<div id="main" class="base">
-            <button class="case"; style="top: 90px;left: 90px;"></button>
-            <button class="case"; style="top: 90px;left: 260px;"></button>
-            <button class="case"; style="top: 255px;left: 90px;"></button>
-            <button class="case"; style="top: 255px;left: 260px;"></button>
-            <button class="case"; style="top: 420px;left: 90px;"></button>
-            <button class="case"; style="top: 420px; left: 260px;"; onclick="document.getElementById('main').style.filter='blur(20px)';document.getElementById('main').style.transitionDuration='200ms';document.getElementById('dialog').style.display='block'"></button>
+            <button id='btn1' class="case"; style="top: 90px;left: 90px;"; onclick="test()"></button>
+            <button id='btn2' class="case"; style="top: 90px;left: 260px;"></button>
+            <button id='btn3' class="case"; style="top: 255px;left: 90px;"></button>
+            <button id='btn4' class="case"; style="top: 255px;left: 260px;"></button>
+            <button id='btn5' class="case"; style="top: 420px;left: 90px;"></button>
+            <button id='btn6' class="case"; style="top: 420px; left: 260px;"; onclick="showbox()"></button>
         </div>
 
-		<div id='dialog' class="boite-dialogue"></div>
-	
+		<div id='dialog' class="boite-dialogue">
+			<div class="cadran-humidity">
+				<div id='pourcentage' style="color: rgb(255, 255, 255);font-weight: 900;font-size: 30px;font-family: Arial, Helvetica, sans-serif;text-align: center;top:50%;left:50%;position: absolute;transform: translate(-50%, -50%);z-index: 1;"></div>
+				<div class="waves"></div>
+		</div>
 	</body>
 
 
