@@ -72,8 +72,6 @@
 
 		function plantList(x)
 		{
-			document.getElementById('plantesIcones').innerHTML= plantesIcones[currentPlant];
-			document.getElementById('plantesNoms').innerHTML= plantesNoms[currentPlant];
 			if(x==1)
 			{
 				currentPlant = currentPlant + 1;
@@ -92,6 +90,8 @@
 					currentPlant = 6;
 				}
 			}
+			document.getElementById('plantesIcones').innerHTML= plantesIcones[currentPlant];
+			document.getElementById('plantesNoms').innerHTML= plantesNoms[currentPlant];
 			
 		}
 
