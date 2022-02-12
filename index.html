@@ -37,8 +37,11 @@
             "Alyssum saxatile",
             "Artemisia stelleriana",
         ];
+
+		let caseData=[0,0,0,0,0,0];
+		let caseActuelle=0;
+
 		let temp =[12, 45, 67, 2, 78, 10]; //valeur des taux d'humiditée mesurés 
-		let caseActuelle = 0;
 		let pourcentage = 0;
 
         function quit()
@@ -54,8 +57,8 @@
 			document.getElementById('pourcentage').innerHTML= pourcentage + "%";
 			document.getElementById('caseNumber').innerHTML= caseActuelle;
 			document.querySelector('.waves').style.height=pourcentage_px+'px';
-            document.getElementById('plantesIcones').innerHTML= plantesIcones[6];
-			document.getElementById('plantesNoms').innerHTML= plantesNoms[6];
+            document.getElementById('plantesIcones').innerHTML= plantesIcones[caseData[caseActuelle]];
+			document.getElementById('plantesNoms').innerHTML= plantesNoms[caseData[caseActuelle]];
 		}
 
 		function stopBack()
@@ -64,6 +67,39 @@
 			base.disabled = true;
 
 		}
+
+		var currentPlant = 0;
+
+		function plantList(x)
+		{
+			document.getElementById('plantesIcones').innerHTML= plantesIcones[currentPlant];
+			document.getElementById('plantesNoms').innerHTML= plantesNoms[currentPlant];
+			if(x==1)
+			{
+				currentPlant = currentPlant + 1;
+
+				if(currentPlant == 7)
+				{
+					currentPlant = 0;
+				}
+			}
+			if(x==2)
+			{
+				currentPlant = currentPlant - 1;
+
+				if(currentPlant == -1)
+				{
+					currentPlant = 6;
+				}
+			}
+			
+		}
+
+			function applyPlant()
+			{
+				caseData[caseActuelle]=currentPlant;
+			}
+		
 	</script>
 
 	<style>
@@ -161,12 +197,12 @@
 	
 	<body id="background" class="background">
 		<div id="main" class="base">
-            <button id='btn1' class="case"; style="top: 90px;left: 90px;"; onclick="pourcentage = temp[0]; caseActuelle = 1;showBox();"></button>
-            <button id='btn2' class="case"; style="top: 90px;left: 260px;"; onclick="pourcentage = temp[1]; caseActuelle = 2;showBox();"></button>
-            <button id='btn3' class="case"; style="top: 255px;left: 90px;"; onclick="pourcentage = temp[2]; caseActuelle = 3;showBox();"></button>
-            <button id='btn4' class="case"; style="top: 255px;left: 260px;"; onclick="pourcentage = temp[3]; caseActuelle = 4;showBox();"></button>
-            <button id='btn5' class="case"; style="top: 420px;left: 90px;"; onclick="pourcentage = temp[4]; caseActuelle = 5;showBox();"></button>
-            <button id='btn6' class="case"; style="top: 420px; left: 260px;"; onclick="pourcentage = temp[5]; caseActuelle = 6;showBox();"></button>
+            <button id='btn1' class="case"; style="top: 90px;left: 90px;"; onclick="pourcentage = temp[0]; caseActuelle = 0;showBox();"></button>
+            <button id='btn2' class="case"; style="top: 90px;left: 260px;"; onclick="pourcentage = temp[1]; caseActuelle = 1;showBox();"></button>
+            <button id='btn3' class="case"; style="top: 255px;left: 90px;"; onclick="pourcentage = temp[2]; caseActuelle = 2;showBox();"></button>
+            <button id='btn4' class="case"; style="top: 255px;left: 260px;"; onclick="pourcentage = temp[3]; caseActuelle = 3;showBox();"></button>
+            <button id='btn5' class="case"; style="top: 420px;left: 90px;"; onclick="pourcentage = temp[4]; caseActuelle = 4;showBox();"></button>
+            <button id='btn6' class="case"; style="top: 420px; left: 260px;"; onclick="pourcentage = temp[5]; caseActuelle = 5;showBox();"></button>
         </div>
 		<div id='dialog' class="boite-dialogue">
 			<div class="cadran-humidity">
@@ -179,8 +215,8 @@
             <div id='plantesNoms' class="text plantesNoms" style="user-select: none;">Plantipus</div>
 
 			<div id='flèches'>
-				<div><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;top:80%; left:85%;transform: translate(-50%, -50%);position: absolute;fill:white;width:30px; height:30px;" xml:space="preserve"><polygon style="transform-origin: 50% 50%;transform: rotate(90deg);" points="0,332.668 245.004,82.631 490,332.668 413.507,407.369 245.004,235.402 76.493,407.369"/></svg></div>
-				<div><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;top:80%; left:45%;transform: translate(-50%, -50%);position: absolute;fill:white;width:30px; height:30px;" xml:space="preserve"><polygon style="transform-origin: 50% 50%;transform: rotate(-90deg);" points="0,332.668 245.004,82.631 490,332.668 413.507,407.369 245.004,235.402 76.493,407.369"/></svg></div>
+				<div onclick="plantList(1)"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;top:80%; left:85%;transform: translate(-50%, -50%);position: absolute;fill:white;width:30px; height:30px;" xml:space="preserve"><polygon style="transform-origin: 50% 50%;transform: rotate(90deg);" points="0,332.668 245.004,82.631 490,332.668 413.507,407.369 245.004,235.402 76.493,407.369"/></svg></div>
+				<div onclick="plantList(2)"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;top:80%; left:45%;transform: translate(-50%, -50%);position: absolute;fill:white;width:30px; height:30px;" xml:space="preserve"><polygon style="transform-origin: 50% 50%;transform: rotate(-90deg);" points="0,332.668 245.004,82.631 490,332.668 413.507,407.369 245.004,235.402 76.493,407.369"/></svg></div>
 			</div>
 		</div>
 	</body>
