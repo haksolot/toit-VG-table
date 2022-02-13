@@ -43,6 +43,7 @@
 
 		let temp =[12, 45, 67, 2, 78, 10]; //valeur des taux d'humiditée mesurés 
 		let pourcentage = 0;
+		var currentPlant = caseData[caseActuelle];
 
         function quit()
         {
@@ -65,18 +66,15 @@
 		{
 			var base = document.getElementsByClassName('base');
 			base.disabled = true;
-
 		}
 
-		var currentPlant = 0;
+		
 
 		function plantList(x)
 		{
 			if(x==1)
 			{	
-				
 				currentPlant = currentPlant + 1;
-
 				if(currentPlant == 7)
 				{
 					currentPlant = 0;
@@ -85,7 +83,6 @@
 			if(x==2)
 			{
 				currentPlant = currentPlant - 1;
-
 				if(currentPlant == -1)
 				{
 					currentPlant = 6;
@@ -97,13 +94,13 @@
 			{
 				document.getElementById('apply').style.fill="#8ffc0a";
 			}
-			
 		}
 
-			function applyPlant()
+			function applyPlant(x)
 			{
 				caseData[caseActuelle]=currentPlant;
 				document.getElementById('apply').style.fill="white";
+				document.getElementById(caseActuelle).innerHTML= plantesIcones[caseData[caseActuelle]];
 			}
 		
 	</script>
@@ -130,7 +127,7 @@
     transform: translate(-50%, -50%);
     font-size: 30px;
     text-align: center;
-	vertical-align: text-top;
+	vertical-align:top;
 	}
 	
     .base {
@@ -212,12 +209,12 @@
 	
 	<body id="background" class="background">
 		<div id="main" class="base">
-            <button id='btn1' class="case"; style="top: 90px;left: 90px;"; onclick="pourcentage = temp[0]; caseActuelle = 0;showBox();"></button>
-            <button id='btn2' class="case"; style="top: 90px;left: 260px;"; onclick="pourcentage = temp[1]; caseActuelle = 1;showBox();"></button>
-            <button id='btn3' class="case"; style="top: 255px;left: 90px;"; onclick="pourcentage = temp[2]; caseActuelle = 2;showBox();"></button>
-            <button id='btn4' class="case"; style="top: 255px;left: 260px;"; onclick="pourcentage = temp[3]; caseActuelle = 3;showBox();"></button>
-            <button id='btn5' class="case"; style="top: 420px;left: 90px;"; onclick="pourcentage = temp[4]; caseActuelle = 4;showBox();"></button>
-            <button id='btn6' class="case"; style="top: 420px; left: 260px;"; onclick="pourcentage = temp[5]; caseActuelle = 5;showBox();"></button>
+            <button id=0 class="case"; style="top: 90px;left: 90px;"; onclick="pourcentage = temp[0]; caseActuelle = 0;showBox();"></button>
+            <button id=1 class="case"; style="top: 90px;left: 260px;"; onclick="pourcentage = temp[1]; caseActuelle = 1;showBox();"></button>
+            <button id=2 class="case"; style="top: 255px;left: 90px;"; onclick="pourcentage = temp[2]; caseActuelle = 2;showBox();"></button>
+            <button id=3 class="case"; style="top: 255px;left: 260px;"; onclick="pourcentage = temp[3]; caseActuelle = 3;showBox();"></button>
+            <button id=4 class="case"; style="top: 420px;left: 90px;"; onclick="pourcentage = temp[4]; caseActuelle = 4;showBox();"></button>
+            <button id=5 class="case"; style="top: 420px; left: 260px;"; onclick="pourcentage = temp[5]; caseActuelle = 5;showBox();"></button>
         </div>
 		<div id='dialog' class="boite-dialogue">
 			<div class="cadran-humidity">
