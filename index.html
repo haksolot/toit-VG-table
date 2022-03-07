@@ -15,7 +15,8 @@
 				    document.getElementById('dialog').style.display='none';
                 }
                 else if (e.keyCode == '13') {
-                    applyPlant()
+                    applyPlant();
+                    post();
                 }
                 else if (e.keyCode == '37') {
                     plantList(2);
@@ -110,14 +111,10 @@
 
             function post()
             {
-                    // create XMLHttpRequest object
                 const xhr = new XMLHttpRequest()
-                    // open a POST request
                 xhr.open("GET", "/")
-                    // set content-type header to JSON
                 xhr.setRequestHeader("Case", String(caseActuelle));
                 xhr.setRequestHeader("ValeurCase", String(caseData[caseActuelle]));
-                    // send JSON data to the remote server
                 xhr.send();
             };
         </script>
