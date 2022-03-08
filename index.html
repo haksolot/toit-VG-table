@@ -3,7 +3,7 @@
         <head>
             <title>Toit VG-table</title>
         </head>
-        <script>
+        <script language = "JavaScript">
             document.onkeydown = checkKey;
 
             function checkKey(e) {
@@ -48,8 +48,8 @@
             "Artemisia stelleriana",
             ];
 
-            let caseActuelle=0;
-            let caseData=[0,0,0,0,0,0]; //<- valeurs à récupérer pour l'hébergeur
+            let caseActuelle=-1;
+            let caseData=[-1,-1,2,3,4,5]; //<- valeurs à récupérer pour l'hébergeur
             let humi=[52, 89, 12, 3, 75, 25]; //<- valeurs à changer depuis l'hébegeur
             let currentPlant = caseData[caseActuelle];
 
@@ -117,6 +117,14 @@
                 xhr.setRequestHeader("ValeurCase", String(caseData[caseActuelle]));
                 xhr.send();
             };
+
+            function loadIcons()
+            {
+                for (let i=0; i != 6; i++)
+                {
+                    document.getElementById(i).innerHTML= plantesIcones[caseData[i]];
+                }
+            }
         </script>
         <style>
             .background
@@ -223,7 +231,7 @@
             }
         </style>
 
-        <body id="background" class="background">
+        <body id="background" class="background" onload="loadIcons();">
 
             <div id="main" class="base">
                 <button id=0 class="case"; style="top: 90px;left: 90px;"; onclick="caseActuelle = 0;showBox();"></button>
