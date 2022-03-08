@@ -13,6 +13,7 @@ const long timeoutTime = 2000;
 
 void setup() {
   Serial.begin(115200);
+  
   /*Serial.print("Connecting to ");
   Serial.println(ssid);
   WiFi.begin(ssid, password);
