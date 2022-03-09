@@ -48,8 +48,8 @@
             "Artemisia stelleriana",
             ];
 
-            let caseActuelle=-1;
-            let caseData=[-1,-1,2,3,4,5]; //<- valeurs à récupérer pour l'hébergeur
+            let caseActuelle=0;
+            let caseData=[0,1,2,3,4,5]; //<- valeurs à récupérer pour l'hébergeur
             let humi=[52, 89, 12, 3, 75, 25]; //<- valeurs à changer depuis l'hébegeur
             let currentPlant = caseData[caseActuelle];
 
@@ -156,8 +156,8 @@
 
             .base
             {
-                width: 350px;
-                height: 510px;
+                width: 515px;
+                height: 345px;
                 transform: translate(-50%, -50%) skew(20deg);
                 background: rgb(255, 255, 255);
                 border-radius: 25px;
@@ -173,7 +173,7 @@
                 width: 167.5px;
                 height: 160px;
                 border: 50px double black;
-                transform: translate(-49%, -51%);
+                transform: translate(-51%, -49%);
                 background: white;
                 border-radius: 25px;
                 position: absolute;
@@ -186,7 +186,7 @@
                 background: rgb(0, 0, 0);
                 border: 50px double white;
                 transition-duration: 200ms;
-                transform: translate(-50%, -50%);
+                transform: translate(-51%, -47%);
                 box-shadow: -2px 2px 5px rgba(121, 121, 121, 0.575);
             }
 
@@ -236,10 +236,10 @@
             <div id="main" class="base">
                 <button id=0 class="case"; style="top: 90px;left: 90px;"; onclick="caseActuelle = 0;showBox();"></button>
                 <button id=1 class="case"; style="top: 90px;left: 260px;"; onclick="caseActuelle = 1;showBox();"></button>
-                <button id=2 class="case"; style="top: 255px;left: 90px;"; onclick="caseActuelle = 2;showBox();"></button>
-                <button id=3 class="case"; style="top: 255px;left: 260px;"; onclick="caseActuelle = 3;showBox();"></button>
-                <button id=4 class="case"; style="top: 420px;left: 90px;"; onclick="caseActuelle = 4;showBox();"></button>
-                <button id=5 class="case"; style="top: 420px; left: 260px;"; onclick="caseActuelle = 5;showBox();"></button>
+                <button id=2 class="case"; style="top: 90px;left: 430px;"; onclick="caseActuelle = 2;showBox();"></button>
+                <button id=3 class="case"; style="top: 255px;left: 90px;"; onclick="caseActuelle = 3;showBox();"></button>
+                <button id=4 class="case"; style="top: 255px;left: 260px;"; onclick="caseActuelle = 4;showBox();"></button>
+                <button id=5 class="case"; style="top: 255px; left: 430px;"; onclick="caseActuelle = 5;showBox();"></button>
             </div>
 
             <div id='dialog' class="boite-dialogue">
