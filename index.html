@@ -11,8 +11,7 @@
                 e = e || window.event;
 
                 if (e.keyCode == '27') {
-                    document.getElementById('main').style.filter='blur(0px)';
-				    document.getElementById('dialog').style.display='none';
+                    quit();
                 }
                 else if (e.keyCode == '13') {
                     applyPlant();
@@ -69,6 +68,48 @@
                 currentPlant = caseData[caseActuelle];
             };
 
+            let configOpen = 0;
+            let configState = 0;
+            function showConfig()
+            {
+                if (configOpen == 1)
+                {
+                    configOpen = 0;
+                    quit();
+                }
+
+                else
+                {
+                configOpen = 1;
+                document.getElementById('main').style.filter='blur(20px)';
+                document.getElementById('main').style.transitionDuration='200ms';
+                document.getElementById('config').style.display='block';
+                }
+
+                switch(configState)
+                {
+                    case 0:
+                        document.getElementById('configText').innerHTML= '1 - Placez les capteurs au sec';
+                        document.getElementById('configButton').innerHTML= 'Appliquer';
+                        document.getElementById('configButton').style.borderColor='#8ffc0a';
+                        document.getElementById('configButton').style.backgroundColor='#8ffc0a';
+                        break;
+                    case 1:
+                        document.getElementById('configText').innerHTML= "2 - Placez les capteurs dans un verre d'eau";
+                        document.getElementById('configButton').innerHTML= 'Appliquer';
+                        document.getElementById('configButton').style.borderColor='#8ffc0a';
+                        document.getElementById('configButton').style.backgroundColor='#8ffc0a';
+
+                        break;
+                    case 2:
+                        document.getElementById('configText').innerHTML= "Vos capteurs sont à niveau";
+                        document.getElementById('configButton').innerHTML= 'Reconfigurer';
+                        document.getElementById('configButton').style.borderColor='red';
+                        document.getElementById('configButton').style.backgroundColor='red';
+                        break;
+                }
+            };
+
             function plantList(x)
             {
                 if(x==1)
@@ -105,6 +146,7 @@
 
             function quit()
             {
+                document.getElementById('config').style.display='none';
                 document.getElementById('main').style.filter='blur(0px)';
                 document.getElementById('dialog').style.display='none';
             };
@@ -124,7 +166,73 @@
                 {
                     document.getElementById(i).innerHTML= plantesIcones[caseData[i]];
                 }
+            };
+
+            let dryTime = 15;
+            let wetTime = 60;
+
+
+            function setLevel()
+            {
+                switch(configState)
+                {
+                    case 0:
+                        const dryCoutDown = setInterval(() => {
+                        dryTime = dryTime - 1;    
+                        document.getElementById('configButton').style.borderColor='orange';
+                        document.getElementById('configButton').style.backgroundColor='orange';
+                        document.getElementById('configButton').innerHTML= 'Reste: '+Math.floor(dryTime/60)+':'+dryTime%60;
+                        if(dryTime == 0 || dryTime < 0)
+                        {
+                            clearInterval(dryCoutDown)
+
+                            const xhr = new XMLHttpRequest()
+                            xhr.open("GET", "/")
+                            xhr.setRequestHeader("dryLevel", 1);
+                            xhr.send();
+
+                            configOpen = 0;
+                            configState = 1;  
+                            showConfig()
+                        }
+                        }, 1000);
+                        break;
+                    case 1:
+                        const wetCoutDown = setInterval(() => {
+                        wetTime = wetTime - 1;   
+                        document.getElementById('configButton').style.borderColor='orange';
+                        document.getElementById('configButton').style.backgroundColor='orange'; 
+                        document.getElementById('configButton').innerHTML= 'Reste: '+Math.floor(wetTime/60)+':'+wetTime%60;
+                        if(wetTime == 0 || wetTime < 0)
+                        {
+                            clearInterval(wetCoutDown)
+                            document.getElementById('configButton').innerHTML= 'Configuré !';
+                            document.getElementById('configButton').style.borderColor='red';
+                            document.getElementById('configButton').style.backgroundColor='red';
+
+                            const xhr = new XMLHttpRequest()
+                            xhr.open("GET", "/")
+                            xhr.setRequestHeader("setLevel", 1);
+                            xhr.send();
+
+                            configOpen = 0;
+                            configState = 2;  
+                            showConfig()
+                        }
+                        }, 1000); 
+                        break;
+                    case 2:
+                        dryTime = 15;
+                        wetTime = 60;
+                        configOpen = 0;                            
+                        configState = 0;  
+                        showConfig()
+                        break;
+                }               
             }
+
+
+            
         </script>
         <style>
             .background
@@ -195,7 +303,7 @@
                 width: 600px;
                 height: 400px;
                 transform: translate(-50%, -50%);
-                background: rgb(0, 0, 0);
+                background-color: black;
                 border:4px solid rgb(255, 255, 255);
                 border-radius: 25px;
                 position: absolute;
@@ -233,6 +341,13 @@
 
         <body id="background" class="background" onload="loadIcons();">
 
+            <div style="height: 50px;width: 50px;position: absolute;top:5%;right:5%"onclick="showConfig()"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 489.802 489.802" style="enable-background:new 0 0 489.802 489.802;fill:#ffffff" xml:space="preserve"><path d="M20.701,281.901l32.1,0.2c4.8,24.7,14.3,48.7,28.7,70.5l-22.8,22.6c-8.2,8.1-8.2,21.2-0.2,29.4l24.6,24.9c8.1,8.2,21.2,8.2,29.4,0.2l22.8-22.6c21.6,14.6,45.5,24.5,70.2,29.5l-0.2,32.1c-0.1,11.5,9.2,20.8,20.7,20.9l35,0.2c11.5,0.1,20.8-9.2,20.9-20.7l0.2-32.1c24.7-4.8,48.7-14.3,70.5-28.7l22.6,22.8c8.1,8.2,21.2,8.2,29.4,0.2l24.9-24.6c8.2-8.1,8.2-21.2,0.2-29.4l-22.6-22.8c14.6-21.6,24.5-45.5,29.5-70.2l32.1,0.2c11.5,0.1,20.8-9.2,20.9-20.7l0.2-35c0.1-11.5-9.2-20.8-20.7-20.9l-32.1-0.2c-4.8-24.7-14.3-48.7-28.7-70.5l22.8-22.6c8.2-8.1,8.2-21.2,0.2-29.4l-24.6-24.9c-8.1-8.2-21.2-8.2-29.4-0.2l-22.8,22.6c-21.6-14.6-45.5-24.5-70.2-29.5l0.2-32.1c0.1-11.5-9.2-20.8-20.7-20.9l-35-0.2c-11.5-0.1-20.8,9.2-20.9,20.7l-0.3,32.1c-24.8,4.8-48.8,14.3-70.5,28.7l-22.6-22.8c-8.1-8.2-21.2-8.2-29.4-0.2l-24.8,24.6c-8.2,8.1-8.2,21.2-0.2,29.4l22.6,22.8c-14.6,21.6-24.5,45.5-29.5,70.2l-32.1-0.2c-11.5-0.1-20.8,9.2-20.9,20.7l-0.2,35C-0.099,272.401,9.201,281.801,20.701,281.901z M179.301,178.601c36.6-36.2,95.5-35.9,131.7,0.7s35.9,95.5-0.7,131.7s-95.5,35.9-131.7-0.7S142.701,214.801,179.301,178.601z"/></svg></div>
+
+            <div id="config" class="boite-dialogue" style="z-index: 1">
+                <div class="text" style="text-align: center;left:50%;top:16%;user-select: none;">Mise à niveau des capteurs</div>
+                <div id='configText' class="text" style="text-align: center;left:50%;top:50%;font-style: italic;font-size:25px;color: rgba(216, 216, 216, 0.979);user-select: none;">Placez les capteurs dans la même surface humide</div>
+                <div  id='configButton' style="height: auto;width: auto;border:10px solid #8ffc0a;border-radius: 10px;background-color: #8ffc0a;bottom: 10%;left:50%;position: absolute;color:black;font-weight: 900;font-family: Arial, Helvetica, sans-serif;position: absolute;transform: translate(-50%, -50%);font-size: 30px;text-align: center;vertical-align:top;user-select: none;" onclick="setLevel()">Appliquer</div>
+            </div>
             <div id="main" class="base">
                 <button id=0 class="case"; style="top: 90px;left: 90px;"; onclick="caseActuelle = 0;showBox();"></button>
                 <button id=1 class="case"; style="top: 90px;left: 260px;"; onclick="caseActuelle = 1;showBox();"></button>
