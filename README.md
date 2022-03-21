@@ -1,5 +1,5 @@
 # Toit VG-table
-[![logo.png](https://i.postimg.cc/1RLW3ms7/logo.png)](https://postimg.cc/7bn1ByCS)
+[![logo.png](https://i.postimg.cc/1RLW3ms7/logo.png)](https://sean-64.github.io/toit-VG-table/)
 
 
 **Projet STI2D (SIN)**
