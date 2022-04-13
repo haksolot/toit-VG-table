@@ -41,10 +41,19 @@ void setup()
   Serial.println(IP);  
   server.begin();
   */
+pinMode(A0,INPUT);
+pinMode(A1,INPUT);
+pinMode(A2,INPUT);
+pinMode(A3,INPUT);
+pinMode(A4,INPUT);
+pinMode(A5,INPUT);
 }
 
 //Humidity variables
-int humidityLevel[] = {12, 35, 87, 56, 30, 69};
+float levelDry[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+float levelWet[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+float levelFloat[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+int humidityLevel[] = {0, 0, 0, 0, 0, 0};
 //Plant config selection
 int plantSelect[] ={0, 0, 0, 0, 0, 0}; 
 //Current sensor configuration upgrade
@@ -53,8 +62,60 @@ int configState = 0;
 void loop()
 {
   webInterface();
+  pourcentage();
 }
 
+int etalonageDry()
+{
+for (int i = 0 ; i < 15 ; i++){ // Etalonage a sec ----------------------------------------------
+
+delay(1000);
+levelDry[0] += analogRead(A0); 
+levelDry[1] += analogRead(A1);
+levelDry[2] += analogRead(A2);
+levelDry[3] += analogRead(A3);
+levelDry[4] += analogRead(A4);
+levelDry[5] += analogRead(A5);
+}
+
+for (int i = 0 ; i < 6 ; i++){
+  levelDry[i] = levelDry[i]/15.0;
+  }
+delay(1000);
+Serial.println("MET LE TRUC DANS L'EAU BORDEL!");
+}
+
+int etalonageWet()
+{
+for (int i = 0 ; i < 60 ; i++){ // Etalonage dans l'eau ----------------------------------------------
+
+delay(1000);
+
+levelWet[0] += analogRead(A0);
+levelWet[1] += analogRead(A1);
+levelWet[2] += analogRead(A2);
+levelWet[3] += analogRead(A3);
+levelWet[4] += analogRead(A4);
+levelWet[5] += analogRead(A5);
+}
+
+for (int i = 0 ; i < 6 ; i++){
+  levelWet[i] = levelWet[i]/60.0;
+  } 
+delay(1000);
+Serial.println("C'est bon tu peux le sortir");
+}
+
+int pourcentage(){
+  
+Serial.println("Création du pourcentage en cours ...");
+delay (7500);
+for (int i= 0 ; i < 6 ; i++){
+  
+ levelFloat[i] = (100.0 *  ((float(analogRead(i)) - levelWet[i])/ (levelDry[i]-levelWet[i]))); 
+ int humidityLevel[i] = levelFloat[i];
+return HumidityLevel[];
+}
 
 void webInterface() //This function sends the webpage to the client with http protocol and receives http request
 {
