@@ -263,41 +263,39 @@
             position: absolute;
         }
 
-        .base
-        {
-            width: 515px;
-            height: 345px;
-            transform: translate(-50%, -50%) skew(20deg);
-            background: rgb(255, 255, 255);
-            border-radius: 25px;
-            position: absolute;
-            top: 50vh;
-            bottom: 50vh;
-            left:50vw;
-            right:50vw;
-        }
+        .base {
+		/*filter:blur(5px); Pour plus tard*/
+        width: 350px;
+        height: 510px;
+        transform: translate(-50%, -50%) skew(20deg);
+        background: rgb(255, 255, 255);
+	    border-radius: 25px;
+	    position: absolute;
+		top: 50vh;
+		bottom: 50vh;
+		left:50vw;
+		right:50vw;
+    }
 
-        .case
-        {
-            width: 167.5px;
-            height: 160px;
-            border: 50px double black;
-            transform: translate(-51%, -49%);
-            background: white;
-            border-radius: 25px;
-            position: absolute;
-            cursor: pointer;
-            box-shadow: 0px;
-        }
+    .case {
+        width: 167.5px;
+        height: 160px;
+        border: 50px double black;
+        transform: translate(-49%, -51%);
+        background: white;
+	    border-radius: 25px;
+	    position: absolute;
+		cursor: pointer;
+		box-shadow: 0px;
+    }
 
-        .case:hover
-        {
-            background: rgb(0, 0, 0);
-            border: 50px double white;
-            transition-duration: 200ms;
-            transform: translate(-51%, -47%);
-            box-shadow: -2px 2px 5px rgba(121, 121, 121, 0.575);
-        }
+	.case:hover {
+		background: rgb(0, 0, 0);
+		border: 50px double white;
+		transition-duration: 200ms;
+		transform: translate(-50%, -50%);
+		box-shadow: -2px 2px 5px rgba(121, 121, 121, 0.575);
+    }
 
         .boite-dialogue
         {
@@ -352,10 +350,10 @@
         <div id="main" class="base">
             <button id=0 class="case"; style="top: 90px;left: 90px;"; onclick="caseActuelle = 0;showBox();"></button>
             <button id=1 class="case"; style="top: 90px;left: 260px;"; onclick="caseActuelle = 1;showBox();"></button>
-            <button id=2 class="case"; style="top: 90px;left: 430px;"; onclick="caseActuelle = 2;showBox();"></button>
-            <button id=3 class="case"; style="top: 255px;left: 90px;"; onclick="caseActuelle = 3;showBox();"></button>
-            <button id=4 class="case"; style="top: 255px;left: 260px;"; onclick="caseActuelle = 4;showBox();"></button>
-            <button id=5 class="case"; style="top: 255px; left: 430px;"; onclick="caseActuelle = 5;showBox();"></button>
+            <button id=2 class="case"; style="top: 255px;left: 90px;"; onclick="caseActuelle = 2;showBox();"></button>
+            <button id=3 class="case"; style="top: 255px;left: 260px;"; onclick="caseActuelle = 3;showBox();"></button>
+            <button id=4 class="case"; style="top: 420px;left: 90px;"; onclick="caseActuelle = 4;showBox();"></button>
+            <button id=5 class="case"; style="top: 420px; left: 260px;"; onclick="caseActuelle = 5;showBox();"></button>
         </div>
 
         <div id='dialog' class="boite-dialogue">
